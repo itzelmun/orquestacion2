@@ -25,6 +25,7 @@ pipeline {
           }
         }
 	
+
 	dir('phpmyadmin2') {
 	 script {
            dockerImage2 = docker.build dockerimagename2
