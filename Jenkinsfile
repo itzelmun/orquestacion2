@@ -48,7 +48,7 @@ pipeline {
         }
       }
 
-        dir('phpmyadmin2') {
+        dir('phpmyadmin') {
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
             dockerImage2.push("itzmun")
