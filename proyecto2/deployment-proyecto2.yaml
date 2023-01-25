@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: proyecto2
-          image: itzelmunguia/proyecto:itzmun
+          image: itzelmunguia/proyecto2:itzmun
           imagePullPolicy: Always
           ports:
             - containerPort: 80
