@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secrets
+type: Opaque
+data:
+  root-password: c3VwZXItc2VjcmV0LXBhc3N3b3JkCg==
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin-deploy2
+  labels:
+    app: phpmyadmin2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin2
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin2
+    spec:
+      containers:
+        - name: phpmyadmin2
+          image: itzelmunguia/phpmyadmin:itzel2
+          ports:
+            - containerPort: 80
+          env:
+            - name: PMA_HOST
+              value: mysql-service2
+            - name: PMA_PORT
+              value: "3306"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: root-password
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin-service2
+spec:
+  type: ClusterIP
+  selector:
+    app: phpmyadmin2
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
