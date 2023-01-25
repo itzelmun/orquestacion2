@@ -24,9 +24,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deploy2
+  name: mysql-deployment2
   labels:
-    app: mysql-deploy2
+    app: mysql-deployment2
 spec:
   replicas: 1
   selector:

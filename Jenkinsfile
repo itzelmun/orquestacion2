@@ -71,30 +71,30 @@ pipeline {
    steps{
     sshagent(['sshsanchez'])
     {
-     sh 'cd proyecto2 && scp -r -o StrictHostKeyChecking=no deployment-proyecto2.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+     sh 'cd proyecto2 && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       script{
         try{
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-proyecto2.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment proyecto2 --kubeconfig=/home/digesetuser/.kube/config' 
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment proyecto2 --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
        {}
      
-    sh 'cd phpmyadmin && scp -r -o StrictHostKeyChecking=no deployment-phpmyadmin2.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+    sh 'cd phpmyadmin && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       script{
         try{
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-phpmyadmin2.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment phpmyadmin-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
        {}
 
-    sh 'cd mysql && scp -r -o StrictHostKeyChecking=no deployment-mysql2.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+    sh 'cd mysql && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       script{
         try{
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-mysql2.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment mysql-deploy2 --kubeconfig=/home/digesetuser/.kube/config'
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment mysql-deploy2 --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment mysql-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment mysql-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
        {}
 
