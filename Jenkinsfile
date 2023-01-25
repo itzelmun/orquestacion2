@@ -1,8 +1,8 @@
 pipeline {
 
   environment {
-    dockerimagename1 = "itzelmunguia/proyecto2:itzel2"
-    dockerimagename2 = "itzelmunguia/phpmyadmin2:itzel2"
+    dockerimagename1 = "itzelmunguia/proyecto:itzmun"
+    dockerimagename2 = "itzelmunguia/phpmyadmin:itzmun"
     dockerImage1 = ""
     dockerImage2= ""
   }
@@ -43,7 +43,7 @@ pipeline {
 	dir('proyecto2') {
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage1.push("itzel2")
+            dockerImage1.push("itzmun")
           }
         }
       }
@@ -51,7 +51,7 @@ pipeline {
         dir('phpmyadmin2') {
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage2.push("itzel2")
+            dockerImage2.push("itzmun")
           }
         }
       }
@@ -71,28 +71,28 @@ pipeline {
    steps{
     sshagent(['sshsanchez'])
     {
-     sh 'cd proyecto && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+     sh 'cd proyecto2 && scp -r -o StrictHostKeyChecking=no deployment-proyecto2.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       script{
         try{
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-proyecto2.yaml --kubeconfig=/home/digesetuser/.kube/config'
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment proyecto2 --kubeconfig=/home/digesetuser/.kube/config' 
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment proyecto2 --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
        {}
      
-    sh 'cd phpmyadmin && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+    sh 'cd phpmyadmin && scp -r -o StrictHostKeyChecking=no deployment-phpmyadmin2.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       script{
         try{
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-deploy2 --kubeconfig=/home/digesetuser/.kube/config'
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment phpmyadmin-deploy2 --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-phpmyadmin2.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment phpmyadmin-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
        {}
 
-    sh 'cd mysql && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+    sh 'cd mysql && scp -r -o StrictHostKeyChecking=no deployment-mysql2.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       script{
         try{
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment-mysql2.yaml --kubeconfig=/home/digesetuser/.kube/config'
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment mysql-deploy2 --kubeconfig=/home/digesetuser/.kube/config'
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment mysql-deploy2 --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)

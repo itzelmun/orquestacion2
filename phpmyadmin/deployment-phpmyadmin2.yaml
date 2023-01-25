@@ -10,7 +10,7 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phpmyadmin-deploy2
+  name: phpmyadmin-deployment2
   labels:
     app: phpmyadmin2
 spec:
@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: phpmyadmin2
-          image: itzelmunguia/phpmyadmin2:itzmun
+          image: itzelmunguia/phpmyadmin:itzmun
           imagePullPolicy: Always
           ports:
             - containerPort: 80
