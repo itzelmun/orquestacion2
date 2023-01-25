@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: phpmyadmin2
-          image: itzelmunguia/phpmyadmin2:itzmun
+          image: itzelmunguia/phpmyadmin2:itzsan
           imagePullPolicy: Always
           ports:
             - containerPort: 80
