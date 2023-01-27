@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: mysql-secreto2
+  name: mysql-secreto1
 type: Opaque
 data:
   ROOT_PASSWORD: bWktY29udHJh
@@ -50,7 +50,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secreto2
+                  name: mysql-secreto1
                   key: ROOT_PASSWORD
       volumes:
         - name: mysql-data
