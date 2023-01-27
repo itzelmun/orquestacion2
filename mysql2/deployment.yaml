@@ -5,7 +5,7 @@ metadata:
   name: mysql-secreto1
 type: Opaque
 data:
-  ROOT_PASSWORD: bWktY29udHJh
+  ROOT_PASSWORD: ZXN0YS1lcy1taS1jb250cmE=
 
 ---
 
