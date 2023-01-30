@@ -4,7 +4,7 @@ metadata:
   name: mysql-secreto1
 type: Opaque
 data:
-  root-password: aG9sYS1zb3ktaXR6ZWw=
+  ROOT_PASSWORD: aG9sYS1zb3ktaXR6ZWw=
 
 ---
 apiVersion: apps/v1
@@ -38,7 +38,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mysql-secreto1
-                  key: root-password
+                  key: ROOT_PASSWORD
 
 ---
 apiVersion: v1
