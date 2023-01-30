@@ -81,22 +81,23 @@ pipeline {
         //   sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment proyecto2 --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
        {}
-     
-    sh 'cd phpmyadmin2 && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
-      script{
-        try{
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
-           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
-       //  sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment phpmyadmin-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
-          }catch(error)
-       {}
-
+    
     sh 'cd mysql2 && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
       script{
         try{
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
            sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment mysql-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
          //  sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment mysql-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
+          }catch(error)
+       {}
+
+ 
+    sh 'cd phpmyadmin2 && scp -r -o StrictHostKeyChecking=no deployment.yaml digesetuser@148.213.1.131:/home/digesetuser/'
+      script{
+        try{
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl apply -f deployment.yaml --kubeconfig=/home/digesetuser/.kube/config'
+           sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout restart deployment phpmyadmin-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
+       //  sh 'ssh digesetuser@148.213.1.131 microk8s.kubectl rollout status deployment phpmyadmin-deployment2 --kubeconfig=/home/digesetuser/.kube/config'
           }catch(error)
        {}
 
