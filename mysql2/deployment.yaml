@@ -5,14 +5,14 @@ metadata:
   name: mysql-secreto1
 type: Opaque
 data:
-  ROOT_PASSWORD: ZXN0YS1lcy1taS1jb250cmE=
+  ROOT_PASSWORD: aG9sYS1zb3ktaXR6ZWw=
 
 ---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-data-disk
+  name: mysql-proyecto2
 spec:
   accessModes:
     - ReadWriteOnce
@@ -55,7 +55,7 @@ spec:
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
-            claimName: mysql-data-disk
+            claimName: mysql-proyecto2
 
 ---
 apiVersion: v1
